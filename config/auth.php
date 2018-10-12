@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => systemAPV\User::class,
+            'model' => systemAPV\Models\User::class,
         ],
 
         // 'users' => [

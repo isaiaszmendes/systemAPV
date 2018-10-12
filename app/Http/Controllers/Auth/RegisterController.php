@@ -2,7 +2,7 @@
 
 namespace systemAPV\Http\Controllers\Auth;
 
-use systemAPV\User;
+use systemAPV\Models\User;
 use systemAPV\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
