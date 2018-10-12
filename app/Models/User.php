@@ -1,6 +1,6 @@
 <?php
 
-namespace systemAPV;
+namespace systemAPV\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
