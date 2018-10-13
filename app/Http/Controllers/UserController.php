@@ -67,17 +67,16 @@ class UserController extends Controller
 
     public function search(Request $request, User $user)
     {
-        $dataForm = $request->all();
+        $dataForm = $request->except('_token');
 
         $users = $user->search($dataForm)->orderBy('name')->paginate(5);
 
         if ($users) 
         {
-            return view('administrador.usuarios', compact('users'));
+            return view('administrador.usuarios', compact(['users', 'dataForm']));
         }else
         {   
-            return redirect()->route('users')
-            ->with('warning', 'Usuário não localizado com as informações inseridas!');
+            return view('administrador.usuarios', compact(['users', 'dataForm']));
         }
     }
 

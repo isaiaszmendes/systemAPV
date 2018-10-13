@@ -26,6 +26,6 @@ Route::group(['prefix' => 'usuario'], function()
 
     Route::delete('/{id}', 'UserController@destroy')->name('user.destroy');
 
-    Route::post('/search' , 'UserController@search')->name('user.search');
+    Route::any('/search' , 'UserController@search')->name('user.search');
 
 });   

@@ -21,7 +21,7 @@
             {{ csrf_field() }}
             <input type="text" name="name" class="form-control input-sm" placeholder="Nome" title="Pesquisa pelo nome">
             <input type="text" name="email" class="form-control input-sm" placeholder="example@email.com" title="Pesquisa pelo e-mail">
-            <select name="publicado" class="form-control input-sm">
+            <select name="role" class="form-control input-sm">
                 <option value="0">Selecione</option>
                 <option value="2">Atendente</option>
                 <option value="3">Requerente</option>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn" name="novoDistrito" value="">
+                        <input type="submit" class="btn"  value="">
                     </div>
                 </form>
             </div>

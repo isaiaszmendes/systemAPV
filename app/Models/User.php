@@ -39,7 +39,7 @@ class User extends Authenticatable
         {
 
             if (isset($data['name'])) {
-                $query->where('name', $data['name']);
+                $query->where('name', 'LIKE', '%'.$data['name'].'%');
             }
 
             if (isset($data['email'])) {
