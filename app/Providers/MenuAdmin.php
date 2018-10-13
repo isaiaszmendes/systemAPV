@@ -22,15 +22,15 @@ class MenuAdmin extends ServiceProvider
             // # Menu para Pessoas Fisicas
             // if(auth()->guard('pessoaFisica')->user())
             // {              
-            //     Gate::define('pendecias', function ($user) {
+                // Gate::define('pendecias', function ($user) {
 
-            //         if(
-            //             (!$user->endereco) ||
-            //             (!$user->telefone)
-            //         ){
-            //             return $user;
-            //         }
-            //     });
+                //     if(
+                //         (!$user->endereco) ||
+                //         (!$user->telefone)
+                //     ){
+                //         return $user;
+                //     }
+                // });
 
                 // $pf = auth()->user();
                 
@@ -38,13 +38,25 @@ class MenuAdmin extends ServiceProvider
                 // $count =  $pf->telefone ? 0 : 1;
                 // $count += $pf->endereco ? 0 : 1;
 
+                // Gate::define('crud_all', function ($user) {
 
-                $event->menu->add('Administrador');
+                //     if(
+                //         (!$user->endereco) ||
+                //         (!$user->telefone)
+                //     ){
+                //         return $user;
+                //     }
+                // });
+
+
+
+                $event->menu->add('Menu');
                 $event->menu->add(
                     [
                         'text'  =>  'Home',
                         'url'   =>  'home',
                         'icon'  =>  'home',
+                        
                     ],
                     [
                         'text'          =>  'Pendências',
@@ -58,6 +70,7 @@ class MenuAdmin extends ServiceProvider
                         'text'      =>  'Usuários', 
                         'url'       =>  'usuarios',                   
                         'icon'      =>  'users',
+                        'can'       =>  'crud_all',
 
                     ]
                 );

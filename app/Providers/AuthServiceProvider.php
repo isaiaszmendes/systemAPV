@@ -4,6 +4,9 @@ namespace systemAPV\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use systemAPV\Models\Chamado;
+use systemAPV\Models\User;
+use systemAPV\Models\Permission;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,10 +24,23 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Gate $gate)
     {
-        $this->registerPolicies();
+        $this->registerPolicies($gate);
 
-        //
+        $permissions = Permission::with('roles')->get();
+
+        foreach ($permissions as $permission) 
+        {
+            Gate::define($permission->name, function(User $user) use ($permission){
+                return $user->hasPermission($permission);
+            });
+        }
+
+        # Abilita todos as permissions 
+        // Gate::before(function(User $user, $ability){
+        //     if ($user->hasAnyRoles('Administrador'))
+        //     return true;
+        // });
     }
 }

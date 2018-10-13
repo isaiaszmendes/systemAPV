@@ -49,7 +49,17 @@
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><span class="label label-success">Administrador</span></td>
+                                    <td>
+                                        @forelse ($user->roles as $role)
+                                            @if ($role->id == '2')
+                                                <span class="label label-success">{{ $role->name }}</span>
+                                            @else
+                                                <span class="label label-warning">{{ $role->name }}</span>
+                                            @endif
+                                        @empty
+                                            <span class="label label-danger">Não Possui</span>
+                                        @endforelse                                             
+                                    </td>
                                     <td>
                                         <button class="btn btn-danger btn-sm pull-right nowrap" data-toggle="modal" data-target="#excluir"
                                             data-id="{{ $user->id }}"

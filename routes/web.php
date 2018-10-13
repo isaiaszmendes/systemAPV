@@ -16,6 +16,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/home/{id}/update', 'HomeController@update')->name('chamado-update');
+
 Route::get('/usuarios', 'UserController@usuarios')->name('users');
 
 Route::group(['prefix' => 'usuario'], function()

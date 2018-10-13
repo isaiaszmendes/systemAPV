@@ -25,15 +25,20 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-        // Role::findOrFail($request->role);
 
-        $data = $this->validate($request, [
+        $this->validate($request, [
             'name'      =>  'required',
-            'email'     =>  'required|unique:users',            
+            'email'     =>  'required|unique:users',
+            'role'      =>  'nullable'         
         ]);
-        $data['password'] =  bcrypt('123@2018');
+         
+        $user = User::create([
+            'name'      =>  $request->name,
+            'email'     =>  $request->email,
+            'password'  =>  bcrypt('sistema@2018'),
+        ]);
 
-        User::create($data);
+        $user->roles->create();
         
         return redirect()->route('users')
             ->with('flash_message', 'Usuário adicionado com sucesso!');

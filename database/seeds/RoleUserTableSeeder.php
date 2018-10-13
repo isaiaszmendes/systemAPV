@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use systemAPV\Models\UserRole;
+use systemAPV\Models\RoleUser;
 
-class UserRoleTableSeeder extends Seeder
+class RoleUserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class UserRoleTableSeeder extends Seeder
      */
     public function run()
     {
-        UserRole::create([
+        RoleUser::create([
             'user_id'   =>  '1',
             'role_id'   =>  '1',
         ]);

@@ -13,18 +13,18 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name'      => 'Administrador',
-            'descricao' => 'Cuida do Crud dos demais users'
+            'name'          => 'Administrador',
+            'description'   => 'Cuida do Crud dos demais users'
         ]);
 
         Role::create([
-            'name'      => 'Atendente',
-            'descricao' => 'Visualiza os Requerentes, abre e cuida dos chamados de suporte'
+            'name'          => 'Atendente',
+            'description'   => 'Visualiza os Requerentes, abre e cuida dos chamados de suporte'
         ]);
 
         Role::create([
-            'name'      => 'Requerente',
-            'descricao' => 'Solicita ajuda de Suporte'
+            'name'          => 'Requerente',
+            'description'   => 'Solicita ajuda de Suporte'
         ]);
     }
 }
