@@ -172,6 +172,12 @@ return [
         // systemAPV\Providers\BroadcastServiceProvider::class,
         systemAPV\Providers\EventServiceProvider::class,
         systemAPV\Providers\RouteServiceProvider::class,
+        /*
+         * Menu do sistema
+         */
+        systemAPV\Providers\MenuAdmin::class,
+        systemAPV\Providers\MenuAtendente::class,
+        systemAPV\Providers\MenuRequerente::class,
 
     ],
 

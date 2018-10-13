@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRole extends Model
 {
-    protected $table = 'status';
+    protected $table = 'user_role';
     
     protected $fillable = [
         'user_id', 'role_id',
     ];
+
+    public $timestamps = false;
 }
