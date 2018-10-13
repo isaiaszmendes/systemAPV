@@ -27,4 +27,30 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // public function funcao()
+    // {
+    //     return $this->belongsTo(Funcao::class);
+    // }
+
+    public function search(Array $data)
+    {
+        return $this->where(function ($query) use($data)
+        {
+
+            if (isset($data['name'])) {
+                $query->where('name', $data['name']);
+            }
+
+            if (isset($data['email'])) {
+                $query->where('email', $data['email']);
+            }
+
+            // if (isset($data['role'])) {
+            //     $query->where('name', $data['role']);
+            // }
+
+        });
+
+    } 
 }
