@@ -42,7 +42,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>E-mail</th>
-                                <th>Funções</th>
+                                <th>Função</th>
                                 <th></th>
                             </tr>
                             @foreach ($users as $user)
