@@ -65,18 +65,19 @@ class UserController extends Controller
     }
 
 
-    public function search(Request $request, Distrito $distrito)
+    public function search(Request $request, User $user)
     {
         $dataForm = $request->all();
 
-        $distritos = $distrito->search($dataForm)->orderBy('descricao')->paginate(10);
+        $users = $user->search($dataForm)->orderBy('name')->paginate(5);
 
-        if ($dataForm['publicado'] == 1) 
+        if ($users) 
         {
-            return view('gerenciar.distritos.index', compact('distritos'));
+            return view('administrador.usuarios', compact('users'));
         }else
         {   
-            return view('gerenciar.distritos.disabled', compact('distritos'));
+            return redirect()->route('users')
+            ->with('warning', 'Usuário não localizado com as informações inseridas!');
         }
     }
 

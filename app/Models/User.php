@@ -28,10 +28,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // public function funcao()
-    // {
-    //     return $this->belongsTo(Funcao::class);
-    // }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 
     public function search(Array $data)
     {

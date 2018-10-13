@@ -17,9 +17,10 @@
 @section('content')
 
     <div class="form">
-        <form method="POST" class="form form-inline" action="">
+        <form method="POST" class="form form-inline" action="{{ route('user.search') }}">
             {{ csrf_field() }}
             <input type="text" name="name" class="form-control input-sm" placeholder="Nome" title="Pesquisa pelo nome">
+            <input type="text" name="email" class="form-control input-sm" placeholder="example@email.com" title="Pesquisa pelo e-mail">
             <select name="publicado" class="form-control input-sm">
                 <option value="0">Selecione</option>
                 <option value="2">Atendente</option>

@@ -9,8 +9,12 @@
                 <p>Confirma?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirm">Excluir</button>
+                <form method="POST" class="form form-group">
+                    {{ csrf_field() }}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    
+                    <button type="submit" class="btn btn-danger" id="confirm">Excluir</button>
+                </form>
             </div>
         </div>
     </div>
