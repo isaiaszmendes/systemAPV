@@ -71,8 +71,27 @@ class MenuAdmin extends ServiceProvider
                         'url'       =>  'usuarios',                   
                         'icon'      =>  'users',
                         'can'       =>  'crud_all',
-
+                    ],
+                    [
+                        'text'      =>  'Gerênciar', 
+                        'url'       =>  'usuarios',                   
+                        'icon'      =>  'gears',
+                        'can'       =>  'crud_all',
+                        'submenu'   =>  
+                        [
+                            [
+                                'text'      =>  'Funções', 
+                                'url'       =>  route('roles'), 
+                                'icon'      =>  '',                  
+                            ],
+                            [
+                                'text'      =>  'Permissões', 
+                                'url'       =>  route('permissions'),  
+                                'icon'      =>  '',                  
+                            ]
+                        ]
                     ]
+
                 );
             // }
         });

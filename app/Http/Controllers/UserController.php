@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use systemAPV\Models\User;
 use systemAPV\Models\Role;
+use systemAPV\Models\RoleUser;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
         $this->middleware(['auth'/*, */]);
     }
 
-    public function usuarios(){
+    public function index(){
 
         // $roles = Role::all();
         $users = User::where('id', '!=', Auth::id())->orderBy('name')->paginate(5);
@@ -74,16 +75,16 @@ class UserController extends Controller
     {
         $dataForm = $request->except('_token');
 
+        $role = Role::find($request->role);
+
+        if($role){
+            $dataForm['role'] = $role->name;
+        }
+
         $users = $user->search($dataForm)->orderBy('name')->paginate(5);
 
-        if ($users) 
-        {
-            return view('administrador.usuarios', compact(['users', 'dataForm']));
-        }else
-        {   
-            return view('administrador.usuarios', compact(['users', 'dataForm']));
-        }
+        return view('administrador.usuarios', compact(['users', 'dataForm']));
+    
     }
-
 
 }

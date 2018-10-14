@@ -22,7 +22,8 @@
             <input type="text" name="name" class="form-control input-sm" placeholder="Nome" title="Pesquisa pelo nome">
             <input type="text" name="email" class="form-control input-sm" placeholder="example@email.com" title="Pesquisa pelo e-mail">
             <select name="role" class="form-control input-sm">
-                <option value="0">Selecione</option>
+                <option value="">Selecione</option>
+                <option value="1">Administrador</option>
                 <option value="2">Atendente</option>
                 <option value="3">Requerente</option>
             </select>
@@ -51,7 +52,9 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         @forelse ($user->roles as $role)
-                                            @if ($role->id == '2')
+                                            @if ($role->id == '1')
+                                                <span class="label label-primary">{{ $role->name }}</span>
+                                            @elseif($role->id == '2')
                                                 <span class="label label-success">{{ $role->name }}</span>
                                             @else
                                                 <span class="label label-warning">{{ $role->name }}</span>
@@ -85,7 +88,7 @@
 
     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#user"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
 
-    <!-- Editar Distrito -->
+
     <div class="modal fade" id="user" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

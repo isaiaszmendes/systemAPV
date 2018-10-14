@@ -51,20 +51,21 @@ class User extends Authenticatable
 
     public function search(Array $data)
     {
-        return $this->where(function ($query) use($data)
-        {
+      
+         return $this->where(function ($query) use($data)
+            {
+                if (isset($data['name'])) {
+                    $query->where('name', 'LIKE', '%'.$data['name'].'%');
+                }
 
-            if (isset($data['name'])) {
-                $query->where('name', 'LIKE', '%'.$data['name'].'%');
-            }
-
-            if (isset($data['email'])) {
-                $query->where('email', $data['email']);
-            }
-
-            // if (isset($data['role'])) {
-            //     $query->where('name', $data['role']);
-            // }
+                if (isset($data['email'])) {
+                    $query->where('email', $data['email']);
+                }
+            })->whereHas('roles', function($query) use($data)
+            {
+                if (isset($data['role'])) {
+                    $query->where('name', $data['role']);
+                }
 
         });
 
