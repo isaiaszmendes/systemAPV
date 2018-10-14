@@ -63,19 +63,22 @@
                                             <span class="label label-danger">Não Possui</span>
                                         @endforelse                                             
                                     </td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm pull-right nowrap" data-toggle="modal" data-target="#excluir"
-                                            data-id="{{ $user->id }}"
-                                            data-title="Excluir o usuário {{ $user->name }}?"
-                                            data-route="{{ route('user.destroy', $user->id ) }}">
-                                            <i class="glyphicon glyphicon-remove"></i> Excluir
-                                        </button>                                        
-                                        <button class="btn btn-info btn-sm pull-right nowrap" data-toggle="modal" data-target="#user"
+                                    <td class="pull-right">                                                                              
+                                        <button class="btn btn-info btn-sm  " data-toggle="modal" data-target="#user"
                                                 data-id="{{ $user->id }}"
                                                 data-name="{{ $user->name }}"
-                                                data-email="{{ $user->email }}">
+                                                data-email="{{ $user->email }}"
+                                                data-role="{{ $user->roles }}">
                                             <i class="glyphicon glyphicon-pencil"> </i> Editar
                                         </button>
+                                        @if (auth()->user()->id != $user->id) 
+                                            <button class="btn btn-danger btn-sm  " data-toggle="modal" data-target="#excluir"
+                                                data-id="{{ $user->id }}"
+                                                data-title="Excluir o usuário {{ $user->name }}?"
+                                                data-route="{{ route('user.destroy', $user->id ) }}">
+                                                <i class="glyphicon glyphicon-remove"></i> Excluir
+                                            </button>
+                                        @endif 
                                     </td>
                                 </tr>
                             @endforeach
@@ -114,7 +117,8 @@
                             <div class="col-md-3"> 
                                 <label for="role">Função</label>
                                 <select name="role" class="form-control input-sm">
-                                    <option value="0">Selecione</option>
+                                    <option value="">Selecione</option>
+                                    <option value="1">Administrador</option>
                                     <option value="2">Atendente</option>
                                     <option value="3">Requerente</option>
                                 </select>

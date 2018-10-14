@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use systemAPV\Models\User;
 use systemAPV\Models\Role;
 use systemAPV\Models\RoleUser;
+use Gate;
 
 class UserController extends Controller
 {
@@ -17,7 +18,11 @@ class UserController extends Controller
 
     public function index(){
 
-        // $roles = Role::all();
+        if(Gate::denies('crud_all') && Gate::denies('accept_call')){
+            return redirect()->back();
+        }
+
+
         $users = User::where('id', '!=', Auth::id())->orderBy('name')->paginate(5);
         
         return view('administrador.usuarios', compact('users'));
@@ -30,7 +35,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name'      =>  'required',
             'email'     =>  'required|unique:users',
-            'role'      =>  'nullable'         
+            'role'      =>  'required'         
         ]);
          
         $user = User::create([
@@ -39,7 +44,10 @@ class UserController extends Controller
             'password'  =>  bcrypt('sistema@2018'),
         ]);
 
-        $user->roles->create();
+        RoleUser::create([
+            'user_id' => $user->id,
+            'role_id' => $request->role,
+        ]);
         
         return redirect()->route('users')
             ->with('flash_message', 'Usuário adicionado com sucesso!');
@@ -52,9 +60,11 @@ class UserController extends Controller
         $data = $this->validate($request, [
             'name'      =>  'required',
             'email'     =>  'required',
-            // 'role'      =>  ''            
+            'role'      =>  'required'          
         ]);
-
+        
+        $user->roles()->sync($request->role);
+        
         $user->update($data);
 
         return redirect()->route('users')

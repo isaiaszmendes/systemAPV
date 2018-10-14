@@ -91,6 +91,12 @@ class MenuAdmin extends ServiceProvider
                             ]
                         ]
                     ]
+                    , [
+                        'text'      =>  'Ajuda', 
+                        'url'       =>  'usuarios',                   
+                        'icon'      =>  'question',
+                        'can'       =>  'request_called',
+                    ]
 
                 );
             // }
