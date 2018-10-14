@@ -2,10 +2,12 @@
 
 namespace systemAPV\Models;
 
+use systemAPV\Models\Call;
+use systemAPV\Models\Comment;
+use systemAPV\Models\Permission;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use systemAPV\Models\Permission;
 
 class User extends Authenticatable
 {
@@ -46,6 +48,16 @@ class User extends Authenticatable
         }
 
         return $this->roles->contains('name', $roles);
+    }
+
+    public function calls()
+    {
+        return $this->hasMany(Call::class);
+    }
+
+    public function comments()
+    {
+        return $this->belongsTo(Comment::class);
     }
 
 

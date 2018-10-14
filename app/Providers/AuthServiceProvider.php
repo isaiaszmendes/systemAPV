@@ -28,16 +28,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        $permissions = Permission::with('roles')->get();
+        // $permissions = Permission::with('roles')->get();
 
-        foreach ($permissions as $permission) 
-        {
-            Gate::define($permission->name, function(User $user) use ($permission){
-                return $user->hasPermission($permission);
-            });
-        }
+        // foreach ($permissions as $permission) 
+        // {
+        //     Gate::define($permission->name, function(User $user) use ($permission){
+        //         return $user->hasPermission($permission);
+        //     });
+        // }
 
-        # Abilita todos as permissions 
+        # habilita todos as permissions 
         // Gate::before(function(User $user, $ability){
         //     if ($user->hasAnyRoles('Administrador'))
         //     return true;

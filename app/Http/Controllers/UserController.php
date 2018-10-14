@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function index(){
 
-        if(Gate::denies('crud_all') && Gate::denies('accept_call')){
+        if(Gate::denies('view_all') && Gate::denies('accept_call')){
             return redirect()->back();
         }
 

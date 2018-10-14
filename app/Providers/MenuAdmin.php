@@ -19,9 +19,7 @@ class MenuAdmin extends ServiceProvider
         $this->registerPolicies();
 
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
-            // # Menu para Pessoas Fisicas
-            // if(auth()->guard('pessoaFisica')->user())
-            // {              
+         
                 // Gate::define('pendecias', function ($user) {
 
                 //     if(
@@ -32,17 +30,17 @@ class MenuAdmin extends ServiceProvider
                 //     }
                 // });
 
-                // $pf = auth()->user();
+                // $user = auth()->user();
                 
-                // # Count das Pendencias PF
-                // $count =  $pf->telefone ? 0 : 1;
-                // $count += $pf->endereco ? 0 : 1;
+                // # Count das Pendencias
+                // $count =  $user->chamado ? 0 : 1;
+                // $count += $user->chamado ? 0 : 1;
 
                 // Gate::define('crud_all', function ($user) {
 
                 //     if(
-                //         (!$user->endereco) ||
-                //         (!$user->telefone)
+                //         (!$user->chamado) ||
+                //         (!$user->chamado)
                 //     ){
                 //         return $user;
                 //     }
@@ -61,7 +59,7 @@ class MenuAdmin extends ServiceProvider
                     [
                         'text'          =>  'Pendências',
                         'icon_color'    =>  'red',
-                        'url'           =>  "route('pessoaFisica.pendecias')",
+                        'url'           =>  "route('pendecias')",
                         'label'         =>  '2',
                         'label_color'   =>  'danger',
                         'can'           =>  'pendecias'
@@ -70,13 +68,13 @@ class MenuAdmin extends ServiceProvider
                         'text'      =>  'Usuários', 
                         'url'       =>  'usuarios',                   
                         'icon'      =>  'users',
-                        'can'       =>  'crud_all',
+                        'can'       =>  'view_all',
                     ],
                     [
                         'text'      =>  'Gerênciar', 
                         'url'       =>  'usuarios',                   
                         'icon'      =>  'gears',
-                        'can'       =>  'crud_all',
+                        'can'       =>  'view_all',
                         'submenu'   =>  
                         [
                             [
