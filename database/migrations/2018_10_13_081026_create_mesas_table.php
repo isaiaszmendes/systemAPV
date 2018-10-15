@@ -26,12 +26,14 @@ class CreateMesasTable extends Migration
             $table->integer('user_id')->unsigned(); // Requerente
             $table->foreign('user_id')
                     ->references('id')
-                    ->on('users');
+                    ->on('users')
+                    ->onDelete('cascade');
 
             $table->integer('atendente_id')->unsigned()->nullable();
             $table->foreign('atendente_id')
                     ->references('id')
-                    ->on('users');
+                    ->on('users')
+                    ->onDelete('cascade');
 
             $table->integer('status_id')->unsigned()->default('3');
             $table->foreign('status_id')

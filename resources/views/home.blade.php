@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <h3>Bem vindo, {{ auth()->user()->name }}!</h3>
+    <h3> {{ auth()->user()->name }}!</h3>
     
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
         Optio magni libero tempora aperiam recusandae omnis alias accusamus non, 
@@ -15,9 +15,4 @@
          temporibus quos repudiandae!
     </p>
 
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-            Optio magni libero tempora aperiam recusandae omnis alias accusamus non, 
-            assumenda repellendus ut aspernatur enim deleniti culpa iusto corporis
-             temporibus quos repudiandae!
-        </p>
 @stop

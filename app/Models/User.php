@@ -62,8 +62,7 @@ class User extends Authenticatable
 
 
     public function search(Array $data)
-    {
-      
+    {      
          return $this->where(function ($query) use($data)
             {
                 if (isset($data['name'])) {
@@ -80,6 +79,5 @@ class User extends Authenticatable
                 }
 
         });
-
     } 
 }

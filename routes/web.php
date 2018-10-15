@@ -83,8 +83,17 @@ Route::group(['prefix' => 'ajuda'], function()
 
 Route::group(['prefix' => 'atendente'], function()
 {
-    Route::get('/mesas', 'UserController@mesasDisponiveis')->name('atendente.mesas');
+    Route::get('/mesas-disponíveis', 'UserController@necessitandoAjuda')->name('mesas.necessitandoAjuda');
 
+    Route::get('/mesas-atendimento', 'UserController@mesasEmAtendimento')->name('mesas.mesasEmAtendimento');
+
+    Route::get('/meus-atendimentos', 'UserController@meuAtendimento')->name('mesas.meuAtendimento');
+
+    Route::get('/mesa-sem-cliente', 'UserController@semCliente')->name('mesas.semCliente');
+
+    Route::post('/mesa-atender', 'UserController@atenderMesa')->name('mesas.atender');
+
+    
 
 }); 
 

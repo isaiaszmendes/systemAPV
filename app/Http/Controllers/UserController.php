@@ -43,7 +43,15 @@ class UserController extends Controller
             'email'     =>  $request->email,
             'password'  =>  bcrypt('123456'),
         ]);
+        if($request->role == 3){
+            Mesa::create([
+                'user_id'   => $user->id,
+                'status_id' => '1'
+            ]);
+        }
 
+        $user = Auth::user();
+        
         RoleUser::create([
             'user_id' => $user->id,
             'role_id' => $request->role,
@@ -134,16 +142,68 @@ class UserController extends Controller
 
         return view('mesas.ajuda');
     }
-    public function mesasDisponiveis(){
+
+    
+
+    public function semCliente(){
 
         if(Gate::denies('view_requerentes')){
             return redirect()->back();
         }
 
-        $mesas = Mesa::all();
+        $mesas = Mesa::where('status_id', '1')->get();
            
         return view('mesas.index', compact('mesas'));
     }
+
+
+    public function mesasEmAtendimento(Mesa $mesa){
+
+        if(Gate::denies('view_requerentes')){
+            return redirect()->back();
+        }
+
+        $mesas = Mesa::where('atendente_id','!=',Null)->get();
+           
+        return view('mesas.index', compact('mesas'));
+    }
+
+    public function necessitandoAjuda(){
+
+        if(Gate::denies('view_requerentes')){
+            return redirect()->back();
+        }
+
+        $mesas = Mesa::where('status_id', '3')->get();
+           
+        return view('mesas.index', compact('mesas'));
+    }
+
+    public function meuAtendimento(Mesa $mesa){
+
+        if(Gate::denies('view_requerentes')){
+            return redirect()->back();
+        }
+
+        $mesas = Mesa::where('atendente_id','=',Auth::id(),'and','status_id','2')->get();
+           
+        return view('mesas.index', compact('mesas'));
+    }
+
+    public function atenderMesa(Request $request){
+
     
+        $user = Auth::user();
+
+        $mesa = Mesa::find($request->id);
+
+        $mesa->update([
+            'atendente_id'  => $user->id,
+            'status_id'     => '4'
+            ]);
+
+        return redirect()->back()
+            ->with('flash_message', 'Atendente foi até a mesa!');
+    }
 
 }
