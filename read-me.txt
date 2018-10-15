@@ -1,0 +1,22 @@
+Olá!
+
+Para rodar a aplicação, é necessário:
+
+1 - Inportar a dump mysql para obtermos o banco de dados (está na pasta Dump);
+
+2 - Configurar o arquivo .env dentro da aolicação;
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_system	<<<<<<<<< Suas configurações
+DB_USERNAME=root    	<<<<<<<<<
+DB_PASSWORD=		<<<<<<<<<
+
+3 - Logar no sistema: 
+
+Admin 		->> login com email: admin@email.com  		Senha 123456
+
+Atendente 	->> login com email: atendente@email.com  	Senha 123456
+
+Requerente	->> login com email: mesa1@email.com  		Senha 123456
