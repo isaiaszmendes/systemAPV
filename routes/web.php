@@ -93,7 +93,6 @@ Route::group(['prefix' => 'atendente'], function()
 
     Route::post('/mesa-atender', 'UserController@atenderMesa')->name('mesas.atender');
 
-    
 
 }); 
 

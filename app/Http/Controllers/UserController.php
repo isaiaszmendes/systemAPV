@@ -43,14 +43,13 @@ class UserController extends Controller
             'email'     =>  $request->email,
             'password'  =>  bcrypt('123456'),
         ]);
+
         if($request->role == 3){
             Mesa::create([
                 'user_id'   => $user->id,
                 'status_id' => '1'
             ]);
         }
-
-        $user = Auth::user();
         
         RoleUser::create([
             'user_id' => $user->id,
@@ -113,13 +112,11 @@ class UserController extends Controller
 
         $user = Auth::user();
         $mesa = Mesa::where('user_id', $user->id)->first();
-        
-        if($mesa){
+
+        // dd($mesa->status->id);
            
-            return view('requerente.ajuda', compact('mesa'));
-        }
-        return view('requerente.ajuda');
-        
+        return view('requerente.ajuda', compact('mesa'));
+    
     }
 
     public function solicitar(){
@@ -127,14 +124,16 @@ class UserController extends Controller
         if(Gate::denies('request_called')){
             return redirect()->back();
         }
-        
-        $user = Auth::user();
 
-        $mesa = Mesa::create([
-            'user_id' => Auth::id(),
+        $user = Auth::user();
+        $mesa = Mesa::where('user_id', $user->id)->first();
+
+        $mesa->update([
+            'status_id' =>  '3',
         ]);
+
                        
-        return redirect()->back()
+        return redirect()->route('ajuda')
             ->with('flash_message', 'Você solicitou ajuda, aguarde um atendente!');
     }
 
