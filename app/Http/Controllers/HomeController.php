@@ -3,8 +3,6 @@
 namespace systemAPV\Http\Controllers;
 
 use Illuminate\Http\Request;
-use systemAPV\Models\Chamado;
-use Gate;
 
 class HomeController extends Controller
 {
@@ -23,21 +21,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Chamado $chamado)
+    public function index()
     {
-        $chamados = $chamado->all();
-        return view('home', compact('chamados'));
+        return view('home');
     }
 
-    public function update( $id)
-    {
-        $chamado = Chamado::find($id);
-
-        // $this->authorize('chamado-update', $chamado);
-
-        if (Gate::denies('chamado-update', $chamado))
-            abort(403,'não pode');
-
-        return view('chamado-update', compact('chamado'));
-    }
 }

@@ -2,7 +2,7 @@
 
 namespace systemAPV\Models;
 
-use systemAPV\Models\Call;
+use systemAPV\Models\Mesa;
 use systemAPV\Models\Comment;
 use systemAPV\Models\Permission;
 use Illuminate\Notifications\Notifiable;
@@ -50,9 +50,9 @@ class User extends Authenticatable
         return $this->roles->contains('name', $roles);
     }
 
-    public function calls()
+    public function mesa()
     {
-        return $this->hasMany(Call::class);
+        return $this->hasMany(Mesa::class);
     }
 
     public function comments()

@@ -20,7 +20,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home/{id}/update', 'HomeController@update')->name('chamado-update');
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +69,24 @@ Route::group(['prefix' => 'permission'], function()
     Route::get('/{id}/roles', 'PermissionController@roles')->name('permission.roles');
 
 }); 
+
+
+Route::group(['prefix' => 'ajuda'], function()
+{
+    Route::get('/', 'UserController@ajuda')->name('ajuda');
+
+    Route::get('/mesas', 'UserController@ajuda')->name('mesas');
+
+    Route::post('/solicitando', 'UserController@solicitar')->name('ajuda.solicitar');
+
+}); 
+
+Route::group(['prefix' => 'atendente'], function()
+{
+    Route::get('/mesas', 'UserController@mesasDisponiveis')->name('atendente.mesas');
+
+
+}); 
+
+Route::get('/pendencia', 'UserController@pendencia')->name('ajuda.pendencia');
 

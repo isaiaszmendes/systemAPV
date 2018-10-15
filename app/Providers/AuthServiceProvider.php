@@ -4,7 +4,6 @@ namespace systemAPV\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use systemAPV\Models\Chamado;
 use systemAPV\Models\User;
 use systemAPV\Models\Permission;
 
@@ -28,14 +27,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        // $permissions = Permission::with('roles')->get();
+        $permissions = Permission::with('roles')->get();
 
-        // foreach ($permissions as $permission) 
-        // {
-        //     Gate::define($permission->name, function(User $user) use ($permission){
-        //         return $user->hasPermission($permission);
-        //     });
-        // }
+        foreach ($permissions as $permission) 
+        {
+            Gate::define($permission->name, function(User $user) use ($permission){
+                return $user->hasPermission($permission);
+            });
+        }
 
         # habilita todos as permissions 
         // Gate::before(function(User $user, $ability){

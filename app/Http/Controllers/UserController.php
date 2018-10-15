@@ -5,6 +5,7 @@ namespace systemAPV\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use systemAPV\Models\User;
+use systemAPV\Models\Mesa;
 use systemAPV\Models\Role;
 use systemAPV\Models\RoleUser;
 use Gate;
@@ -21,7 +22,6 @@ class UserController extends Controller
         if(Gate::denies('view_all') && Gate::denies('accept_call')){
             return redirect()->back();
         }
-
 
         $users = User::where('id', '!=', Auth::id())->orderBy('name')->paginate(5);
         
@@ -41,7 +41,7 @@ class UserController extends Controller
         $user = User::create([
             'name'      =>  $request->name,
             'email'     =>  $request->email,
-            'password'  =>  bcrypt('sistema@2018'),
+            'password'  =>  bcrypt('123456'),
         ]);
 
         RoleUser::create([
@@ -96,5 +96,54 @@ class UserController extends Controller
         return view('administrador.usuarios', compact(['users', 'dataForm']));
     
     }
+    # requerente
+    public function ajuda(){
+
+        if(Gate::denies('request_called')){
+            return redirect()->back();
+        }
+
+        $user = Auth::user();
+        $mesa = Mesa::where('user_id', $user->id)->first();
+        
+        if($mesa){
+           
+            return view('requerente.ajuda', compact('mesa'));
+        }
+        return view('requerente.ajuda');
+        
+    }
+
+    public function solicitar(){
+
+        if(Gate::denies('request_called')){
+            return redirect()->back();
+        }
+        
+        $user = Auth::user();
+
+        $mesa = Mesa::create([
+            'user_id' => Auth::id(),
+        ]);
+                       
+        return redirect()->back()
+            ->with('flash_message', 'Você solicitou ajuda, aguarde um atendente!');
+    }
+
+    public function mesas(){
+
+        return view('mesas.ajuda');
+    }
+    public function mesasDisponiveis(){
+
+        if(Gate::denies('view_requerentes')){
+            return redirect()->back();
+        }
+
+        $mesas = Mesa::all();
+           
+        return view('mesas.index', compact('mesas'));
+    }
+    
 
 }
