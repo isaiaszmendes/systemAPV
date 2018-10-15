@@ -32,15 +32,12 @@ class CreateMesasTable extends Migration
             $table->integer('atendente_id')->unsigned()->nullable();
             $table->foreign('atendente_id')
                     ->references('id')
-                    ->on('users')
-                    ->onDelete('cascade');
+                    ->on('users');
 
             $table->integer('status_id')->unsigned()->default('3');
             $table->foreign('status_id')
                     ->references('id')
                     ->on('status');
-
-                       
         });
     }
 
